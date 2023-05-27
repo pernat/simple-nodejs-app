@@ -8,4 +8,7 @@ node {
       sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleNode2"
     }
   }
+  stage('Build') {
+    sh "cd app/ && npm install"
+  }
 }
