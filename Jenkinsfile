@@ -1,4 +1,5 @@
 node {
+  tools {nodejs "Node20"}
   stage('SCM') {
     checkout scm
   }
