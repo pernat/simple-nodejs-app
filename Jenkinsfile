@@ -1,19 +1,11 @@
-pipeline {
-    agent any
-    options {
-        skipStagesAfterUnstable()
+node {
+  stage('SCM') {
+    checkout scm
+  }
+  stage('SonarQube Analysis') {
+    def scannerHome = tool 'SonarQube';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'cd app/ && npm install'
-            }
-        }
-        stage('SonarQube Analysis') {
-            def scannerHome = tool 'SonarQube';
-            withSonarQubeEnv() {
-            sh "${scannerHome}/bin/sonar-scanner"
-            }
-        }
-    }
+  }
 }
