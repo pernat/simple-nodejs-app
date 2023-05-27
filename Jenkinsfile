@@ -9,6 +9,9 @@ node {
     }
   }
   stage('Build') {
-    sh "cd app/ && npm install"
+    withNPM() {
+    sh 'cd app/ && npm install'
+    }
+
   }
 }
