@@ -9,7 +9,7 @@ node {
     }
   }
   stage('Build') {
-    withNPM() {
+    withNPM(npmrcConfig: 'MyNpmrcConfig') {
     sh 'cd app/ && npm install'
     }
 
