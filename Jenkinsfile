@@ -20,6 +20,7 @@ pipeline {
                 withNPM(npmrcConfig: '7bcf87c3-9d83-4617-b92d-c582d94deaac') {
                 sh 'cd app/ && npm install'
                 }
+            }
         }
     }
 }
