@@ -6,7 +6,7 @@ pipeline {
             agent any
             steps {
               withSonarQubeEnv('SonarQube') {
-                sh 'npx sonarqube-scanner'
+                sh 'npx sonarqube-scanner -Dsonar.projectKey=simpleNode2'
               }
             }
           }
