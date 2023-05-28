@@ -6,7 +6,7 @@ pipeline {
             agent any
             steps {
               withSonarQubeEnv('SonarQube') {
-                sh 'sonarqube-scanner'
+                sh 'npx sonarqube-scanner'
               }
             }
           }
