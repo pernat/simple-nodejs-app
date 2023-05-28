@@ -6,7 +6,7 @@ pipeline {
             agent any
             steps {
               withSonarQubeEnv('SonarQube') {
-                sh 'node --version'
+                sh 'sonar-scanner'
               }
             }
           }
