@@ -1,26 +1,20 @@
 pipeline {
-    agent any
-    tools {nodejs "Node20"}
-    stages {
-        stage('SCM') {
+        agent none
+        stages {
+          stage("build & SonarQube analysis") {
+            agent any
             steps {
-                checkout scm
+              withSonarQubeEnv('SonarQube') {
+                sh 'node --version'
+              }
             }
-        }
-        stage('Test') {
+          }
+          stage("Quality Gate") {
             steps {
-                def scannerHome = tool 'SonarQube';
-                withSonarQubeEnv('SonarQube') {
-                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleNode2"
-                }
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
             }
+          }
         }
-        stage('Deploy') {
-            steps {
-                withNPM(npmrcConfig: '7bcf87c3-9d83-4617-b92d-c582d94deaac') {
-                sh 'cd app/ && npm install'
-                }
-            }
-        }
-    }
-}
+      }
