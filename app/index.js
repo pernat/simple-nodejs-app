@@ -3,6 +3,8 @@ const app = express();
 const request = require("request");
 const wikip = require("wiki-infobox-parser");
 
+const password = "1234567890";
+
 //ejs
 app.set("view engine", "ejs");
 
