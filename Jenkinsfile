@@ -1,5 +1,6 @@
 pipeline {
         agent none
+        tools {nodejs "Node20"}
         stages {
           stage("build & SonarQube analysis") {
             agent any
